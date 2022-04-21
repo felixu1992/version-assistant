@@ -1,0 +1,41 @@
+<idea-plugin>
+  <id>com.your.company.unique.plugin.id</id>
+  <name>Version Assistant</name>
+  <version>1.0</version>
+  <vendor email="felixu0320@gmail.com" url="https:blogs.felixu.top">felixu</vendor>
+
+  <description><![CDATA[
+      版本助手.<br>
+      <em>偷懒小能手，用于帮助懒得升级版本并切换分支合并推送的懒虫们完成这部分工作，需要自己配置 Git 和 Maven 位置，会无差别 git add . 哦，注意保证分支下可安全执行此操作。</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      第一版.<br>
+      <em>仅支持 Maven 工程</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <!-- displayType只有这四种类型, id 在一个插件内不能重复,isLogByDefault表示是否在 Event Log 中记录 -->
+    <notificationGroup displayType="BALLOON" id="version-assistant-notification" isLogByDefault="false"/>
+    <notificationGroup displayType="BALLOON" id="version-assistant-event-log" isLogByDefault="true"/>
+    <applicationConfigurable parentId="tools" instance="top.felixu.settings.VersionSettings" id="version-assistant" displayName="版本助手"/>
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="version_assistant" class="top.felixu.VersionAssistant" text="版本助手" description="帮助修改工程版本号">
+      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta V"/>
+    </action>
+  </actions>
+
+</idea-plugin>
